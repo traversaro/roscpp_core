@@ -370,6 +370,7 @@ TEST(Time, OperatorPlusExceptions)
   EXPECT_THROW(t5 + d3, std::runtime_error);
 }
 
+#ifndef _MSC_VER
 TEST(Time, Constants)
 {
   EXPECT_EQ(Time::MAX.sec, static_cast<uint32_t>(-1));
@@ -399,6 +400,7 @@ TEST(Time, Constants)
   EXPECT_EQ(SteadyTime::UNINITIALIZED.sec, 0);
   EXPECT_EQ(SteadyTime::UNINITIALIZED.nsec, 0);
 }
+#endif
 
 /************************************* Duration Tests *****************/
 
@@ -588,6 +590,7 @@ TEST(Duration, sleepWithSignal)
   ASSERT_TRUE(rc);
 }
 
+#ifndef _MSC_VER
 TEST(Duration, Constants)
 {
   EXPECT_EQ(Duration::MAX.sec, std::numeric_limits<int32_t>::max());
@@ -632,6 +635,7 @@ TEST(Duration, Constants)
   EXPECT_EQ(WallDuration::DAY.sec, 60 * 60 * 24);
   EXPECT_EQ(WallDuration::DAY.nsec, 0);
 }
+#endif
 
 TEST(Rate, constructFromDuration){
   Duration d(4, 0);

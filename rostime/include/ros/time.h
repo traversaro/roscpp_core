@@ -160,10 +160,12 @@ namespace ros
     inline bool is_zero() const { return isZero(); }
     boost::posix_time::ptime toBoost() const;
 
+#ifndef _MSC_VER
     static const T MIN; //!< Minimum representable time
     static const T MAX; //!< Maximum representable time
     static const T ZERO; //!< Zero (invalid) time
     static const T UNINITIALIZED; //!< Uninitialized time
+#endif
   };
 
   /**
@@ -221,10 +223,12 @@ namespace ros
 
   extern ROSTIME_DECL const Time TIME_MAX;
   extern ROSTIME_DECL const Time TIME_MIN;
+#ifndef _MSC_VER
   template<> const Time TimeBase<Time, Duration>::MAX;
   template<> const Time TimeBase<Time, Duration>::MIN;
   template<> const Time TimeBase<Time, Duration>::ZERO;
   template<> const Time TimeBase<Time, Duration>::UNINITIALIZED;
+#endif
 
   /**
    * \brief Time representation.  Always wall-clock time.
@@ -258,11 +262,13 @@ namespace ros
     static bool isSystemTime() { return true; }
   };
   
+#ifndef _MSC_VER
   template<> const WallTime TimeBase<WallTime, WallDuration>::MAX;
   template<> const WallTime TimeBase<WallTime, WallDuration>::MIN;
   template<> const WallTime TimeBase<WallTime, WallDuration>::ZERO;
   template<> const WallTime TimeBase<WallTime, WallDuration>::UNINITIALIZED;
-  
+#endif
+
   /**
    * \brief Time representation.  Always steady-clock time.
    *
@@ -297,10 +303,12 @@ namespace ros
       static bool isSystemTime() { return true; }
   };
 
+#ifndef _MSC_VER
   template<> const SteadyTime TimeBase<SteadyTime, WallDuration>::MAX;
   template<> const SteadyTime TimeBase<SteadyTime, WallDuration>::MIN;
   template<> const SteadyTime TimeBase<SteadyTime, WallDuration>::ZERO;
   template<> const SteadyTime TimeBase<SteadyTime, WallDuration>::UNINITIALIZED;
+#endif
 
   ROSTIME_DECL std::ostream &operator <<(std::ostream &os, const Time &rhs);
   ROSTIME_DECL std::ostream &operator <<(std::ostream &os, const WallTime &rhs);

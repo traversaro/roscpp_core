@@ -95,6 +95,7 @@ public:
   T& fromNSec(int64_t t);
   bool isZero() const;
   boost::posix_time::time_duration toBoost() const;
+#ifndef _MSC_VER
   static const T MIN; //!< Minimum representable duration (negative)
   static const T MAX; //!< Maximum representable duration
   static const T ZERO; //!< Zero duration
@@ -105,6 +106,7 @@ public:
   static const T MILLISECOND; //!< One millisecond duration
   static const T MICROSECOND; //!< One microsecond duration
   static const T NANOSECOND; //!< One nanosecond duration
+#endif
 };
 
 class Rate;
@@ -136,6 +138,7 @@ public:
 
 extern ROSTIME_DECL const Duration DURATION_MAX;
 extern ROSTIME_DECL const Duration DURATION_MIN;
+#ifndef _MSC_VER
 template<> const Duration DurationBase<Duration>::MAX;
 template<> const Duration DurationBase<Duration>::MIN;
 template<> const Duration DurationBase<Duration>::ZERO;
@@ -146,6 +149,7 @@ template<> const Duration DurationBase<Duration>::SECOND;
 template<> const Duration DurationBase<Duration>::MILLISECOND;
 template<> const Duration DurationBase<Duration>::MICROSECOND;
 template<> const Duration DurationBase<Duration>::NANOSECOND;
+#endif
 
 /**
  * \brief Duration representation for use with the WallTime class.
@@ -172,6 +176,7 @@ public:
   bool sleep() const;
 };
 
+#ifndef _MSC_VER
 template<> const WallDuration DurationBase<WallDuration>::MAX;
 template<> const WallDuration DurationBase<WallDuration>::MIN;
 template<> const WallDuration DurationBase<WallDuration>::ZERO;
@@ -182,6 +187,7 @@ template<> const WallDuration DurationBase<WallDuration>::SECOND;
 template<> const WallDuration DurationBase<WallDuration>::MILLISECOND;
 template<> const WallDuration DurationBase<WallDuration>::MICROSECOND;
 template<> const WallDuration DurationBase<WallDuration>::NANOSECOND;
+#endif
 
 ROSTIME_DECL std::ostream &operator <<(std::ostream &os, const Duration &rhs);
 ROSTIME_DECL std::ostream &operator <<(std::ostream &os, const WallDuration &rhs);

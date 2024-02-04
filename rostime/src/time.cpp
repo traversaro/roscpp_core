@@ -83,6 +83,7 @@ namespace ros
   const Duration DURATION_MAX(std::numeric_limits<int32_t>::max(), 999999999);
   const Duration DURATION_MIN(std::numeric_limits<int32_t>::min(), 0);
 
+#ifndef _MSC_VER
   template<> const Duration DurationBase<Duration>::MAX = DURATION_MAX;
   template<> const Duration DurationBase<Duration>::MIN = DURATION_MIN;
   template<> const Duration DurationBase<Duration>::ZERO = Duration(0, 0);
@@ -104,10 +105,12 @@ namespace ros
   template<> const WallDuration DurationBase<WallDuration>::MILLISECOND = WallDuration(Duration::MILLISECOND.sec, Duration::MILLISECOND.nsec);
   template<> const WallDuration DurationBase<WallDuration>::MICROSECOND = WallDuration(Duration::MICROSECOND.sec, Duration::MICROSECOND.nsec);
   template<> const WallDuration DurationBase<WallDuration>::NANOSECOND = WallDuration(Duration::NANOSECOND.sec, Duration::NANOSECOND.nsec);
+#endif
 
   const Time TIME_MAX(std::numeric_limits<uint32_t>::max(), 999999999);
   const Time TIME_MIN(0, 1);
 
+#ifndef _MSC_VER
   template<> const Time TimeBase<Time, Duration>::MAX = TIME_MAX;
   template<> const Time TimeBase<Time, Duration>::MIN = TIME_MIN;
   template<> const Time TimeBase<Time, Duration>::ZERO = Time(0, 0);
@@ -122,6 +125,7 @@ namespace ros
   template<> const SteadyTime TimeBase<SteadyTime, WallDuration>::MIN = SteadyTime(Time::MIN.sec, Time::MIN.nsec);
   template<> const SteadyTime TimeBase<SteadyTime, WallDuration>::ZERO = SteadyTime(Time::ZERO.sec, Time::ZERO.nsec);
   template<> const SteadyTime TimeBase<SteadyTime, WallDuration>::UNINITIALIZED = SteadyTime(Time::UNINITIALIZED.sec, Time::UNINITIALIZED.nsec);
+#endif
 
   // This is declared here because it's set from the Time class but read from
   // the Duration class, and need not be exported to users of either.
